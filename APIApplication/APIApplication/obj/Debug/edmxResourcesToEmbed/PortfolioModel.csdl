@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CompanyModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblPortfolioDetail">
+    <Key>
+      <PropertyRef Name="PortFolioName" />
+    </Key>
+    <Property Name="PortFolioName" Type="String" MaxLength="120" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CoverImage" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="YoutubeVideo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="CompanyPortfolioEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblPortfolioDetails" EntityType="Self.tblPortfolioDetail" />
+  </EntityContainer>
+</Schema>

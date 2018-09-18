@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CompanyModel1StoreContainer" CdmEntityContainer="CompanyPortfolioEntities">
+    <EntitySetMapping Name="tblPortfolioDetails">
+      <EntityTypeMapping TypeName="CompanyModel1.tblPortfolioDetail">
+        <MappingFragment StoreEntitySet="tblPortfolioDetails">
+          <ScalarProperty Name="PortFolioName" ColumnName="PortFolioName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CoverImage" ColumnName="CoverImage" />
+          <ScalarProperty Name="YoutubeVideo" ColumnName="YoutubeVideo" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

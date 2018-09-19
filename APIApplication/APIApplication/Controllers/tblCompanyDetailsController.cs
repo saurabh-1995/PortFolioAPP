@@ -8,67 +8,69 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using APIApplication.Models;
+using DataAccessLayer;
 
 namespace APIApplication.Controllers
 {
     public class tblCompanyDetailsController : ApiController
     {
-        private CompanyDetailsEntities db = new CompanyDetailsEntities();
+        
 
         // GET: api/tblCompanyDetails
         public IQueryable<tblCompanyDetail> GettblCompanyDetails()
         {
-            return db.tblCompanyDetails;
+            var companyList = DBOperations.GetCompanyDetails();
+            return companyList;
         }
 
         // GET: api/tblCompanyDetails/5
         [ResponseType(typeof(tblCompanyDetail))]
         public IHttpActionResult GettblCompanyDetail(string id)
         {
-            tblCompanyDetail tblCompanyDetail1 = db.tblCompanyDetails.Find(id);
-            if (tblCompanyDetail1 == null)
+
+            var companyDetails = DBOperations.GetCompanyByID(id);
+            if (companyDetails == null)
             {
                 return NotFound();
             }
 
-            return Ok(tblCompanyDetail1);
+            return Ok(companyDetails);
         }
 
-        // PUT: api/tblCompanyDetails/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PuttblCompanyDetail(string id, tblCompanyDetail tblCompanyDetail1)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// PUT: api/tblCompanyDetails/5
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PuttblCompanyDetail(string id, tblCompanyDetail tblCompanyDetail1)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (id != tblCompanyDetail1.CompanyName)
-            {
-                return BadRequest();
-            }
+        //    if (id != tblCompanyDetail1.CompanyName)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            db.Entry(tblCompanyDetail1).State = EntityState.Modified;
+        //    db.Entry(tblCompanyDetail1).State = EntityState.Modified;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!tblCompanyDetailExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!tblCompanyDetailExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
         // POST: api/tblCompanyDetails
         [ResponseType(typeof(tblCompanyDetail))]
@@ -79,55 +81,46 @@ namespace APIApplication.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.tblCompanyDetails.Add(tblCompanyDetail1);
-
             try
             {
-                db.SaveChanges();
+                DBOperations.InsertCompanyDetails(tblCompanyDetail1);
             }
-            catch (DbUpdateException)
+            catch(DbUpdateException ex)
             {
-                if (tblCompanyDetailExists(tblCompanyDetail1.CompanyName))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                throw ex;
+            }         
 
             return CreatedAtRoute("DefaultApi", new { id = tblCompanyDetail1.CompanyName }, tblCompanyDetail1);
         }
 
-        // DELETE: api/tblCompanyDetails/5
-        [ResponseType(typeof(tblCompanyDetail))]
-        public IHttpActionResult DeletetblCompanyDetail(string id)
-        {
-            tblCompanyDetail tblCompanyDetail = db.tblCompanyDetails.Find(id);
-            if (tblCompanyDetail == null)
-            {
-                return NotFound();
-            }
+        //// DELETE: api/tblCompanyDetails/5
+        //[ResponseType(typeof(tblCompanyDetail))]
+        //public IHttpActionResult DeletetblCompanyDetail(string id)
+        //{
+        //    tblCompanyDetail tblCompanyDetail = db.tblCompanyDetails.Find(id);
+        //    if (tblCompanyDetail == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            db.tblCompanyDetails.Remove(tblCompanyDetail);
-            db.SaveChanges();
+        //    db.tblCompanyDetails.Remove(tblCompanyDetail);
+        //    db.SaveChanges();
 
-            return Ok(tblCompanyDetail);
-        }
+        //    return Ok(tblCompanyDetail);
+        //}
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
 
-        private bool tblCompanyDetailExists(string id)
-        {
-            return db.tblCompanyDetails.Count(e => e.CompanyName == id) > 0;
-        }
+        //private bool tblCompanyDetailExists(string id)
+        //{
+        //    return db.tblCompanyDetails.Count(e => e.CompanyName == id) > 0;
+        //}
     }
 }

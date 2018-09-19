@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccessLayer;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -8,25 +9,27 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using APIApplication.Models;
+
 
 namespace APIApplication.Controllers
 {
     public class tblPortfolioDetailsController : ApiController
     {
-        private PortfolioEntities db = new PortfolioEntities();
+        
 
         // GET: api/tblPortfolioDetails
         public IQueryable<tblPortfolioDetail> GettblPortfolioDetails()
         {
-            return db.tblPortfolioDetails;
+            //return db.tblPortfolioDetails;
+            var portfolioList = DBOperations.GetPortfolioDetails();
+            return portfolioList;
         }
 
         // GET: api/tblPortfolioDetails/5
         [ResponseType(typeof(tblPortfolioDetail))]
-        public IHttpActionResult GettblPortfolioDetail(string id)
+        public IHttpActionResult GettblPortfolioDetail(string companyName)
         {
-            tblPortfolioDetail tblPortfolioDetail1 = db.tblPortfolioDetails.Find(id);
+            var tblPortfolioDetail1 = DBOperations.GetPortfolioByID(companyName);
             if (tblPortfolioDetail1 == null)
             {
                 return NotFound();
@@ -36,39 +39,39 @@ namespace APIApplication.Controllers
         }
 
         // PUT: api/tblPortfolioDetails/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PuttblPortfolioDetail(string id, tblPortfolioDetail tblPortfolioDetail1)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PuttblPortfolioDetail(string id, tblPortfolioDetail tblPortfolioDetail1)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (id != tblPortfolioDetail1.PortFolioName)
-            {
-                return BadRequest();
-            }
+        //    if (id != tblPortfolioDetail1.PortFolioName)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            db.Entry(tblPortfolioDetail1).State = EntityState.Modified;
+        //    db.Entry(tblPortfolioDetail1).State = EntityState.Modified;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!tblPortfolioDetailExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!tblPortfolioDetailExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
         // POST: api/tblPortfolioDetails
         [ResponseType(typeof(tblPortfolioDetail))]
@@ -79,55 +82,48 @@ namespace APIApplication.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.tblPortfolioDetails.Add(tblPortfolioDetail1);
+            
 
             try
             {
-                db.SaveChanges();
+                DBOperations.InsertPortfolioDetails(tblPortfolioDetail1);
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException ex)
             {
-                if (tblPortfolioDetailExists(tblPortfolioDetail1.PortFolioName))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                throw ex;
             }
 
             return CreatedAtRoute("DefaultApi", new { id = tblPortfolioDetail1.PortFolioName }, tblPortfolioDetail1);
         }
 
-        // DELETE: api/tblPortfolioDetails/5
-        [ResponseType(typeof(tblPortfolioDetail))]
-        public IHttpActionResult DeletetblPortfolioDetail(string id)
-        {
-            tblPortfolioDetail tblPortfolioDetail = db.tblPortfolioDetails.Find(id);
-            if (tblPortfolioDetail == null)
-            {
-                return NotFound();
-            }
+        //// DELETE: api/tblPortfolioDetails/5
+        //[ResponseType(typeof(tblPortfolioDetail))]
+        //public IHttpActionResult DeletetblPortfolioDetail(string id)
+        //{
+        //    tblPortfolioDetail tblPortfolioDetail = db.tblPortfolioDetails.Find(id);
+        //    if (tblPortfolioDetail == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            db.tblPortfolioDetails.Remove(tblPortfolioDetail);
-            db.SaveChanges();
+        //    db.tblPortfolioDetails.Remove(tblPortfolioDetail);
+        //    db.SaveChanges();
 
-            return Ok(tblPortfolioDetail);
-        }
+        //    return Ok(tblPortfolioDetail);
+        //}
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
 
-        private bool tblPortfolioDetailExists(string id)
-        {
-            return db.tblPortfolioDetails.Count(e => e.PortFolioName == id) > 0;
-        }
+        //private bool tblPortfolioDetailExists(string id)
+        //{
+        //    return db.tblPortfolioDetails.Count(e => e.PortFolioName == id) > 0;
+        //}
     }
 }

@@ -1,0 +1,14 @@
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DataAccessLayer\bin\Debug\DataAccessLayer.dll.config
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DataAccessLayer\bin\Debug\EntityFramework.dll
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DataAccessLayer\bin\Debug\EntityFramework.xml
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DataAccessLayer\obj\Debug\DataAccessLayer.csprojAssemblyReference.cache
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CopyComplete
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DataAccessLayer\bin\Debug\log4net.dll
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DataAccessLayer\bin\Debug\log4net.xml

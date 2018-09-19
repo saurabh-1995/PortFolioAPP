@@ -1,0 +1,9 @@
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DAL\bin\Debug\netstandard2.0\DAL.deps.json
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DAL\bin\Debug\netstandard2.0\DAL.dll
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DAL\bin\Debug\netstandard2.0\DAL.pdb
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DAL\obj\Debug\netstandard2.0\DAL.csprojAssemblyReference.cache
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DAL\obj\Debug\netstandard2.0\DAL.csproj.CoreCompileInputs.cache
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DAL\obj\Debug\netstandard2.0\DAL.AssemblyInfoInputs.cache
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DAL\obj\Debug\netstandard2.0\DAL.AssemblyInfo.cs
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DAL\obj\Debug\netstandard2.0\DAL.dll
+C:\Users\SAURABH\Desktop\PortFolio\APIApplication\DAL\obj\Debug\netstandard2.0\DAL.pdb

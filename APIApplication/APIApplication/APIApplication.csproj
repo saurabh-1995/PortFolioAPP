@@ -51,6 +51,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -199,44 +202,9 @@
     <Compile Include="Controllers\tblCompanyDetailsController.cs" />
     <Compile Include="Controllers\tblPortfolioDetailsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="ExLogger\ExceptionManagerApi.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CompanyDetailsModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CompanyDetailsModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CompanyDetailsModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CompanyDetailsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CompanyDetailsModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CompanyDetailsModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CompanyPortfolioModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CompanyPortfolioModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CompanyPortfolioModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CompanyPortfolioModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CompanyPortfolioModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CompanyPortfolioModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tblCompanyDetail.cs">
-      <DependentUpon>CompanyPortfolioModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tblPortfolioDetail.cs">
-      <DependentUpon>CompanyPortfolioModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -249,26 +217,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\CompanyDetailsModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CompanyDetailsModel.edmx</DependentUpon>
-      <LastGenOutput>CompanyDetailsModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\CompanyDetailsModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CompanyDetailsModel.edmx</DependentUpon>
-      <LastGenOutput>CompanyDetailsModel.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\CompanyPortfolioModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CompanyPortfolioModel.edmx</DependentUpon>
-      <LastGenOutput>CompanyPortfolioModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\CompanyPortfolioModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CompanyPortfolioModel.edmx</DependentUpon>
-      <LastGenOutput>CompanyPortfolioModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -294,20 +242,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <EntityDeploy Include="Models\CompanyDetailsModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CompanyDetailsModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\CompanyDetailsModel.edmx.diagram">
-      <DependentUpon>CompanyDetailsModel.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\CompanyPortfolioModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CompanyPortfolioModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\CompanyPortfolioModel.edmx.diagram">
-      <DependentUpon>CompanyPortfolioModel.edmx</DependentUpon>
-    </Content>
+    <Content Include="ExLogger\Log4net.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -331,6 +266,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -363,6 +299,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
+      <Project>{17957ed3-e250-49de-a63a-23b9c4e2b24f}</Project>
+      <Name>DataAccessLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
